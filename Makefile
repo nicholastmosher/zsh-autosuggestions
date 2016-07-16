@@ -26,7 +26,7 @@ TEST_PREREQS := \
 	$(SHUNIT2) \
 	$(STUB_SH)
 
-all: $(PLUGIN_TARGET)
+all: $(PLUGIN_TARGET) autofish
 
 $(PLUGIN_TARGET): $(HEADER_FILES) $(SRC_FILES)
 	cat $(HEADER_FILES) | sed -e 's/^/# /g' > $@
@@ -37,6 +37,9 @@ $(SHUNIT2):
 
 $(STUB_SH):
 	git submodule update --init vendor/stub.sh
+
+autofish:
+	make -C src/strategies/autofish
 
 .PHONY: clean
 clean:
